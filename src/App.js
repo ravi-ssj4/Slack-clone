@@ -6,6 +6,9 @@ import {
   Routes
 } from "react-router-dom";
 import Header from './app/components/Header';
+import Sidebar from './app/components/Sidebar';
+import styled from 'styled-components';
+import Chat from './app/components/Chat';
 
 function App() {
   return (
@@ -13,18 +16,22 @@ function App() {
       <Router>
         <>
           <Header />
-          <Routes>
-            <AppBody>
+          <AppBody>
+            <Sidebar />
+            <Routes>
+              <Route path="/" element={<Chat />} exact />
 
-              <Route path="/" element={
-              } exact />
-
-          </Routes>
-        </AppBody>
-      </>
-    </Router>
+            </Routes>
+          </AppBody>
+        </>
+      </Router>
     </div >
   );
 }
 
 export default App;
+
+const AppBody = styled.div`
+  display: flex;
+  height: 100vh;
+`
