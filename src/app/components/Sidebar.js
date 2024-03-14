@@ -14,13 +14,16 @@ import SidebarOption from './SidebarOption'
 import { ExpandMore } from '@mui/icons-material'
 import { Add } from '@mui/icons-material'
 import { useCollection } from 'react-firebase-hooks/firestore'
-import { db } from '../firebase'
+import { auth, db } from '../firebase'
 import { collection } from 'firebase/firestore'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 function Sidebar() {
 
   const [channels, loading, error] = useCollection(collection(db, "rooms"));
   console.log(channels)
+
+  const [user] = useAuthState(auth)
 
   return (
     <SidebarContainer>
@@ -29,7 +32,7 @@ function Sidebar() {
           <h2>Ravi's FAM!</h2>
           <h3>
             <FiberManualRecord />
-            Ravi Ranjan
+            {user.displayName}
           </h3>
         </SidebarInfo>
         <Create/>
